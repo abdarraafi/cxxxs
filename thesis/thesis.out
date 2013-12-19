@@ -1,0 +1,47 @@
+\BOOKMARK [0][-]{chapter*.1}{Biographical Sketch}{}% 1
+\BOOKMARK [0][-]{chapter*.2}{Acknowledgments}{}% 2
+\BOOKMARK [0][-]{chapter*.3}{Abstract}{}% 3
+\BOOKMARK [0][-]{chapter*.4}{Contributors and Funding Sources}{}% 4
+\BOOKMARK [0][-]{chapter*.6}{List of Tables}{}% 5
+\BOOKMARK [0][-]{chapter*.7}{List of Figures}{}% 6
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 7
+\BOOKMARK [1][-]{section.1.1}{Problem Statement}{chapter.1}% 8
+\BOOKMARK [1][-]{section.1.2}{All-window Footprint}{chapter.1}% 9
+\BOOKMARK [1][-]{section.1.3}{A New Locality Theory}{chapter.1}% 10
+\BOOKMARK [1][-]{section.1.4}{Thesis Statement and Organization}{chapter.1}% 11
+\BOOKMARK [0][-]{chapter.2}{Background on Metrics, Models and Management}{}% 12
+\BOOKMARK [1][-]{section.2.1}{Core Metrics and Measurement}{chapter.2}% 13
+\BOOKMARK [1][-]{section.2.2}{Metrics Conversions and Denning's Law}{chapter.2}% 14
+\BOOKMARK [1][-]{section.2.3}{Locality Models of Shared Cache}{chapter.2}% 15
+\BOOKMARK [1][-]{section.2.4}{Performance Models of Shared Cache}{chapter.2}% 16
+\BOOKMARK [1][-]{section.2.5}{Other Techniques}{chapter.2}% 17
+\BOOKMARK [0][-]{chapter.3}{Footprint}{}% 18
+\BOOKMARK [1][-]{section.3.1}{Introduction}{chapter.3}% 19
+\BOOKMARK [1][-]{section.3.2}{All-Footprint Analysis}{chapter.3}% 20
+\BOOKMARK [1][-]{section.3.3}{Average Footprint Analysis}{chapter.3}% 21
+\BOOKMARK [1][-]{section.3.4}{Footprint Sampling}{chapter.3}% 22
+\BOOKMARK [1][-]{section.3.5}{Evaluation}{chapter.3}% 23
+\BOOKMARK [1][-]{section.3.6}{Discussion}{chapter.3}% 24
+\BOOKMARK [0][-]{chapter.4}{A Higher Order Theory of Locality}{}% 25
+\BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 26
+\BOOKMARK [1][-]{section.4.2}{Locality Metrics}{chapter.4}% 27
+\BOOKMARK [1][-]{section.4.3}{The Higher Order Relations}{chapter.4}% 28
+\BOOKMARK [1][-]{section.4.4}{The Correctness Condition}{chapter.4}% 29
+\BOOKMARK [1][-]{section.4.5}{Comparison with Working Set Theory}{chapter.4}% 30
+\BOOKMARK [1][-]{section.4.6}{Sampling-based Locality Analysis}{chapter.4}% 31
+\BOOKMARK [1][-]{section.4.7}{Evaluation}{chapter.4}% 32
+\BOOKMARK [1][-]{section.4.8}{Discussion}{chapter.4}% 33
+\BOOKMARK [0][-]{chapter.5}{Cache Sharing Models}{}% 34
+\BOOKMARK [1][-]{section.5.1}{Iterative Cache Sharing Models}{chapter.5}% 35
+\BOOKMARK [1][-]{section.5.2}{Pressure and Sensitivity Models}{chapter.5}% 36
+\BOOKMARK [1][-]{section.5.3}{Evaluation}{chapter.5}% 37
+\BOOKMARK [1][-]{section.5.4}{Discussion}{chapter.5}% 38
+\BOOKMARK [0][-]{chapter.6}{Task Regrouping Framework}{}% 39
+\BOOKMARK [1][-]{section.6.1}{On-line Locality Testing}{chapter.6}% 40
+\BOOKMARK [1][-]{section.6.2}{Dynamic Regrouping}{chapter.6}% 41
+\BOOKMARK [1][-]{section.6.3}{Evaluation}{chapter.6}% 42
+\BOOKMARK [1][-]{section.6.4}{Discussion}{chapter.6}% 43
+\BOOKMARK [0][-]{chapter.7}{Conclusions}{}% 44
+\BOOKMARK [1][-]{section.7.1}{Efficient Measurements of Footprint}{chapter.7}% 45
+\BOOKMARK [1][-]{section.7.2}{A Higher Order Theory of Locality}{chapter.7}% 46
+\BOOKMARK [1][-]{section.7.3}{Intuitive and Accurate Cache Interference Predictions}{chapter.7}% 47

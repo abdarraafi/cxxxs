@@ -1,0 +1,28 @@
+target = "thesis"
+
+task :default => ["#{target}.pdf"]
+
+def compile(target)
+  sh "pdflatex #{target}.tex"
+  sh "bibtex #{target}"
+  sh "pdflatex #{target}.tex"
+  sh "pdflatex #{target}.tex"
+  sh "pdflatex #{target}.tex"
+end
+
+source = Dir.glob('*.tex')
+
+file "#{target}.pdf" => ["#{target}.tex"] + source do
+  compile(target)
+end
+
+task :force do
+  compile(target)
+end
+
+task :clean do
+  ["pdf", "aux", "bbl", "blg", "log", "lof", "lot", "toc"].each do |suf|
+    sh "\\rm -f #{target}.#{suf}"
+    sh "\\rm -f *.#{suf}"
+  end
+end

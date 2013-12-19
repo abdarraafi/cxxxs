@@ -1,0 +1,335 @@
+\documentclass[12pt]{report}
+
+\usepackage{urcsthesis}
+%\usepackage{urcsbiblio}
+
+\usepackage[square]{natbib}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{boxedminipage}
+%\usepackage{cite}
+\usepackage{balance}
+\pagestyle{plain}
+\usepackage{comment}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{hyperref}
+
+\widowpenalty10000
+\clubpenalty10000
+
+\begin{document}
+
+\title{A Higher Order Theory of Locality and Its Application in
+  Multicore Cache Management}
+\author{Xiaoya Xiang}
+\thesissupervisor{Chen Ding}
+
+\maketitle
+
+\newtheorem{theorem}{\sc \bf Theorem}[section]
+\newtheorem{lemma}[theorem]{\sc \bf Lemma}
+\newtheorem{fact}[theorem]{\sc \bf Fact}
+\newtheorem{corollary}[theorem]{\sc Corollary}
+\newtheorem{definition}[theorem]{\sc Definition}
+
+
+% no long needed after including amsthm package
+%
+\begin{comment}
+\newenvironment{proof}[1][\sc \bf Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][\sc \bf Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][\sc \bf Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][\sc \bf Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+      \ifdim\lastskip<1.5em \hskip-\lastskip
+      \hskip1.5em plus0em minus0.5em \fi \nobreak
+      \vrule height0.75em width0.5em depth0.25em\fi}
+\end{comment}
+
+
+\begin{curriculumvitae}
+The author was born in Jingmen, Hubei, China. She graduated in 2005 from
+Huazhong University of Science and Technology with a Bachelor of
+Science degree in Computer Science and Technology and at the same time from
+Wuhan University with a Bachelor of Science degree in Finance. She
+continued studying Computer Science at the Institute of Computing
+Technology, Chinese Academy of Sciences, and got a Master of Science
+degree in 2008. Then she joined the graduate program at the
+University of Rochester, focusing on program locality models and
+program corun penalty analysis. She was supervised by Professor Chen
+Ding during her doctoral study. She interned at IBM Toronto in the
+summers of 2009 and 2010 and at Google in the summer of 2011. Her main
+research progress was published as below.
+
+\begin{itemize}
+\item Xiaoya Xiang, Bin Bao, Tongxin Bai, Chen Ding, and Trishul
+  M. Chilimbi, All-window profiling and composable models of cache sharing.
+In Proceedings of the 16th ACM SIGPLAN Symposium on Principles and Practice
+of Parallel Programming, San Antonio, Texas, USA, 2011, pages 91-102.
+\item Xiaoya Xiang, Bin Bao, Chen Ding, and Yaoqing Gao, Linear-time
+  modeling of program working set in shared cache. In Proceedings of
+  the 20th International Conference on Parallel Architectures and
+  Compilation Techniques, Galveston Island, Texas, USA, 2011, pages 350-360.
+\item Xiaoya Xiang and Bin Bao, How to Fit Program Footprint
+  Curves. In ACM SIGPLAN Workshop on Memory Systems Performance and
+  Correctness, San Jose, California, USA, 2011.
+\item Xiaoya Xiang, Bin Bao, Chen Ding, and Kai Shen. Cache conscious
+  task regrouping on multicore processors. In Proceedings of the 12th
+  IEEE/ACM International Symposium on Cluster, Cloud and Grid
+  Computing, Ottawa, Canada, 2012, pages 603-611.
+\item Xiaoya Xiang, Chen Ding, Hao Luo, and Bin Bao, HOTL: a Higher
+  Order Theory of Locality. In Proceedings of the 18th International
+  Conference on Architectural Support for Programming Languages and
+  Operating Systems, Houston, Texas, USA, 2013.
+\end{itemize}
+
+\end{curriculumvitae}
+
+\begin{acknowledgments}
+I would like to thank my advisor, Professor Chen Ding, for his
+guidance during my doctoral study. From him, I learned not only
+research skill but also research attitude. He is intelligent, erudite,
+nice, and tolerant. Most important, he is very supportive whenever I
+face challenges. There were a couple of times that I felt hopeless
+about the research topic I worked on and wanted to give up. Chen worked
+closely with me to explore the potential of my work until it was widely 
+recognized. Chen also helped me a lot with English writing. 
+
+I appreciate the help from my committee members, Michael Scott, Sandhya
+Dwarkadas, and Michael Gage. They did a great job of keeping me on the right
+track and widening my knowledge. The high-level suggestions they gave
+saved me a lot of time on unnecessary details and repeating other
+people's work. I would like to thank Kai Shen and Yaoqing Gao. Kai
+gave me a lot of support when we were working on task grouping. Yaoqing was my mentor when I interned at IBM Toronto. The idea
+of using average footprint was developed when I worked with Yaoqing. 
+
+Special thanks to my teammates, Tongxin, Xiaoming, Bin, Hao,
+and Jake. I learned a lot from the discussions with them, especially
+Bin. In addition to theoretical suggestions, Bin also gave me a hand
+collecting experiment results.
+
+I am very grateful to my friends in Rochester, especially the ones
+in the Computer Science department, Katie (for all the parties celebrating
+Chinese Festivals), Kyle and his wife Kristy (for the concerts and
+books), Licheng, Hongzhou and his wife Shang, Rongrong, Yi, Xiao and
+his wife Yang, Xu, Zhuan, Li and his girlfriend Ran, and Yu. Sorry
+that I am not able to list you all because of the limited
+space. Thanks for adding more colors to my life in Rochester!
+Especially, thanks to Zhuan for teaching me how to drive, and thanks to Yuzhe
+for teaching me how to swim. I would also like to thank JoMarie, Marty
+and Pat. Thanks for your support in many aspects to make my life
+abroad much easier.
+
+Last and most important. I would like to thank my parents, who taught
+me how to face the world with love and smile. Thanks to Ximing for pushing
+me finish this thesis. 
+\end{acknowledgments}
+
+\begin{abstract}
+  As multi-core processors become commonplace and cloud computing is
+  gaining acceptance, applications are increasingly run in parallel
+  over a shared memory hierarchy.  While the traditional machine and
+  program metrics such as miss ratio and reuse distance can precisely
+  characterize the memory performance of a single program, they are
+  not composable and therefore cannot model the dynamic interaction
+  between simultaneously running programs.
+
+  This dissertation presents an alternative metric called program
+  footprint.  Given a program execution, its footprint is the amount
+  of data accessed in a given time period.  The footprint is
+  composable --- the aggregate footprint of a set of programs is the
+  sum of the footprint of the individual footprints.  The dissertation
+  presents the following techniques
+
+  \begin{itemize}
+  \item \emph{Near real-time footprint measurement}, first by using two novel
+    algorithms, one for footprint distribution and the other footprint
+    average, and then by run-time sampling.
+  \item \emph{A higher order theory of cache locality}, which shows
+    that traditional metrics can be derived from the footprint and
+    vice versa.  (As a result, previous locality metrics can also be
+    obtained in near real time.)
+  \item \emph{Composable model of cache sharing}, by footprint
+    composition, which is faster and simpler to use
+    than previous reuse-distance based models.
+  \item \emph{Cache-conscious task regrouping}, which reorganizes a
+    parallel workload to minimize the interference in shared cache.
+    \end{itemize}
+
+Through these techniques, the dissertation establishes the thesis that
+\emph{program interaction in shared cache can be efficiently and accurately
+modeled and dynamically optimized}.
+
+\end{abstract}
+
+\begin{contributors}
+This work was supervised by a dissertation committee which consists of
+Professor Chen Ding, Michael Scott, and Sandhya Dwarkadas from the
+Department of Computer Science, Professor Michael Gage from the
+Department of Mathematics. The comparison with the working set theory
+was done in collaboration with Professor Peter Denning and Chen
+Ding. Professor Chen Ding contributed to the idea of both lifetime
+sampling and higher order theory of locality and also contributed many
+beautiful sentences to this thesis.  Profiling tools used
+throughout the paper was built based on Pin, a dynamic binary
+instrumentation tool developed by Intel. Part of the footprint and
+reuse distance traces were collected using the parallel collecting
+script written by Bin Bao. Bin also helped running the script for some
+experiments. The bin-mapping library used for plotting histograms were
+provided by Tongxin Bai. All other work covered in the dissertation
+was completed by the student independently. The student is supported
+by IBM Center for Advanced Studies Fellowships. The research is also
+supported by the National Science Foundation (Contract No. CCF-1116104,
+CCF-0963759, CNS-0834566). 
+\end{contributors}
+
+\tableofcontents
+
+\listoftables
+
+\listoffigures
+
+\include{chap-intro}
+\include{chap-background}
+\include{chap-fp}
+\include{chap-model}
+\include{chap-corun}
+\include{chap-regroup}
+
+\chapter{Conclusions}
+\label{chap:summary}
+In this dissertation, we have developed new algorithms, models, and
+techniques to characterize, predict, and improve the performance of
+co-running applications in shared cache.  These include
+
+% The following is too detailed and not showing the interconnection
+% between the studies.  Maybe reordering the content to talk about the
+% pressure/sensitivity first, then the efficiency, and grouping the
+% experimental results together.
+
+\section{Efficient Measurements of Footprint}
+We have presented the first accurate all-window footprint analysis.
+Complete characterization of footprint requires measuring data
+access in all execution windows. Early works either use a small portion
+of windows for efficiency without an estimation of accuracy or use all
+windows while suffering from impractical overhead. 
+The new algorithm measures all windows, combining footprint counting,
+relative precision approximation, and trace compression to reduce the
+asymptotic cost from $O(N^2)$ to $O(CKlogM)$.  We have successfully
+measured all-window footprints in the SPEC2K benchmark suite in its
+full-length executions.  It is the first time such complete
+measurement is made.  The results show that applications differ in
+their footprints in terms of not just the size but also the relation
+with time and the compactness of the distribution.  The previous
+fastest accurate method could only measure these programs on their
+test input, for which the new algorithm reduces the profiling time
+from 2 hours to 1 minute.  The all-window analysis measures a
+quadrillion to nearly a quintillion footprints per second.
+
+Furthermore, we have presented the average footprint as a metric of
+all-window footprint. We have presented a linear-time algorithm for
+accurately measuring the average footprint.  The linear-time algorithm
+uses differential counting based on the forward and backward reuse
+time distance. When tested on SPEC CPU 2000 benchmarks, the
+average-footprint analysis is on average 38 times faster than the
+previous, all-footprint analysis. The average-footprint analysis was
+efficient enough to measure the newer, SPEC 2006 benchmarks, but the
+all-footprint analysis could not. 
+
+\section{A Higher Order Theory of Locality}
+
+We have introduced a higher order theory of locality, a new locality
+model which compiled five Filmer metrics--- the
+footprint, the inter-miss time, the volume fill time, the miss ratio
+curve and the reuse distance---and shown that they are mutually
+derivable.  The derivations form a higher order relation.  We prove
+that two of the miss-ratio derivations, by the footprint and by the
+reuse time, are mathematically equivalent.  As a result, the
+correctness of the conversion depends on the reuse-window
+hypothesis.  In addition, we prove that the average footprint is a
+concave function.  We also give a direct definition of the fill
+time and show it to be unusable in practice.  When comparing with the
+working set theory, we show the recurring theoretical result which we call
+Denning's law of locality.  We show how the new theory complements and
+extends the previous theory.
+
+We have shown that the Filmer metrics can be measured in real time and
+are easy to compose and convert by using it to predict the miss ratio
+for the full suite of the SPEC2006 benchmarks. The new theory
+predicts the miss ratio for over 3000 cache sizes at a
+speed 39\% faster than cache simulation for a single cache size.  The
+prediction is accurate compared to simulation and hardware counter
+results.  Locality sampling obtains a similar accuracy by
+examining 0.9\% of the execution and incurring a cost of less than
+0.5\% of the time of the unmodified code.  When used to predict cache
+interference, the new technique takes 0.5\% of the time of the
+exhaustive testing and predicts the interference accurately for 99.5\%
+of the executions. Given the low overhead and high accuracy, we expect that
+the higher order theory will provide a new
+foundation for developing future techniques of locality analysis and
+optimization. 
+
+\section{Intuitive and Accurate Cache Interference Predictions} 
+
+We have presented an iterative algorithm to compute the
+non-linear, asymmetrical effect of cache sharing with all-window
+footprint distribution and developed a tool
+for ranking program co-run choices without parallel testing.  The
+ranking is close to that from exhaustive parallel testing, reducing
+performance slowdown by as much as a factor of 3 compared to miss-rate
+based ranking. We have also shown that the average footprint curve can
+be used in the composable model instead of all-footprint
+distribution. The model using average footprint shows comparable
+accuracy in shared-cache locality prediction.  
+
+We have presented the cache pressure and sensitivity metrics as tools
+for program analysis and targets for program optimization for shared
+cache, for which the total size is fixed and the replacement is highly
+dynamic.  The new metrics are derived from traditional metrics such as
+program footprint and reuse time histogram. The calculation used to
+predict cache sharing is intuitive and extremely simple.  In fact,
+co-run miss ratios can be computed by hand by looking at the pressure
+and the sensitivity curves. 
+
+The extensive testing of both sequential and parallel benchmarks show
+that the new models produce consistently accurate predictions for
+co-run miss ratios that vary by six orders of magnitude from $10^{-7}$
+to nearly 20\%.  The accuracy is obtained by the models without
+parallel testing or hardware counter inputs.  In these empirical
+results we acquire the greatest confidence that the new models,
+despite of the simplifications we have made to make it usable, have
+captured the program characteristics essential to its performance in
+shared cache and will be useful in shared-cache program tuning and
+optimization.
+
+With accurate interference information in hand, we have presented
+cache-conscious task regrouping, a system that 
+reorganizes multicore co-run executions to minimize interference in
+shared cache.  We have developed algorithms for lifetime sampling,
+group sampling, task regrouping, and task remapping.  When evaluated
+using 12 SPEC 2006 benchmarks, cache-conscious regrouping
+significantly improved over Linux scheduling for mixed floating-point
+and integer workload while gave a similar result for the
+floating-point workload.  In both workloads, it reduced the run-to-run
+performance variation by factors of 2 and 4.  The on-line sampling 
+overhead was negligible for most of the tested programs but could be
+as high as 30\% for a small number of programs.  
+
+
+\bibliographystyle{urcsbiblio}
+%\bibliographystyle{abbrvnat}
+\bibliography{bib/all,bib/misc}
+
+%\include{appendix}
+
+\end{document}
